@@ -15,4 +15,4 @@ threads=20
 pdf_dir="$tmp_dir/candidates_pdf_pics"
 pic_dir="$data_dir/candidates/html/$selection_file/pics"
 files=$(find $pdf_dir -name "*pdf" -exec basename -s .pdf {} +)
-echo "$files" | /usr/bin/parallel --tmpdir "$tmp_dir" -j $threads "inkscape -l $pic_dir/{}.svg $pdf_dir/{}.pdf"
+echo "$files" | parallel --tmpdir "$tmp_dir" -j $threads "inkscape -l $pic_dir/{}.svg $pdf_dir/{}.pdf"

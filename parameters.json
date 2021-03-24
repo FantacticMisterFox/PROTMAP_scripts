@@ -1,8 +1,11 @@
 {
-	"session_id": "&hgsid=248030951_2ReDPwvN4aBeF56gtiCGPcx3QczI",
-	"hub_id": "61514",
-	"data_dir": "/scr/k61san2/john/PROTMAP_data",
-	"tmp_dir": "/scr/k61san2/john/tmp",
-	"chrome_bin": "/homes/biertruck/john/Downloads/chrome-linux/chrome",
-	"blastdb_dir": "/scr/k61san2/john/blast_nr_v5/nr"
+	"session_id": "&hgsid=254520073_YxF73GvXUoEZDQOhbmYwEaD9sEA0",
+	"hub_id": "46785",
+	"data_dir": "/mnt/PROTMAP_data",
+	"tmp_dir": "/mnt/tmp",
+	"publication_dir": "",
+	"ms_dir": "/mnt/ms-spectra/",
+	"chrome_bin": "/root/bin/chrome-linux/chrome",
+	"bin_path": "/root/bin",
+	"blastdb_dir": "/mnt/nr/nr"
 }

@@ -23,12 +23,13 @@ samtools_single() {
 	echo "$fastq"
 	samtools view -S -b "$transcriptom_dir/$fastq.sam" > "$transcriptom_dir/$fastq.bam"
 	cd "$transcriptom_dir"
-	samtools sort "$transcriptom_dir/$fastq.bam" "${fastq}_sorted"
+	samtools sort -o "${fastq}_sorted.bam" "$transcriptom_dir/$fastq.bam"
 	samtools mpileup -S -f "$genome_dir/metagenome.fasta" "${fastq}_sorted.bam" | awk '{print $1, $2-1, $2, $4}' > "$fastq.wig"
 }
 
 genome_dir="$data_dir/genome"
 transcriptom_dir="$data_dir/transcriptom"
+work_dir="$(pwd)"
 
 threads=8
 
@@ -99,3 +100,4 @@ python ./transcriptom/make_average.py
 
 cd "$transcriptom_dir"
 wigToBigWig average.wig "$genome_dir/chrom.sze" average.bw
+cd "$work_dir"

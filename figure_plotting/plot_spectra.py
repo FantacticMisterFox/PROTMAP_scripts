@@ -28,16 +28,13 @@ def load_data():
     cand_dir = data_dir + "/candidates"
     mzml_dir = data_dir + "/ms/SIHUMI/mzML/"
 
-    with open(accu_data_dir + "/database_dic.json", "r") as file_handle:
-        database_dic = json.load(file_handle)
-
     with open(cand_dir + "/" + selection_file + "_list.json", "r") as file_handler:
         cand_list = json.load(file_handler)
 
     with open(accu_data_dir + "/prot_dic.json", "r") as file_handle:
         prot_dic = json.load(file_handle)
 
-    return mzml_dir, database_dic, cand_list, prot_dic
+    return mzml_dir, cand_list, prot_dic
 
 
 def plot_spectra(mzml_id, peptide, scan_id, mzml_dir, spec_pic_dir, psm_id):
@@ -78,7 +75,7 @@ def plot_spectra(mzml_id, peptide, scan_id, mzml_dir, spec_pic_dir, psm_id):
             plt.figure()
             plot.spectrum(spec, grid=False)
             mzml_id = os.path.splitext(os.path.split(mzml_file)[1])[0]
-            plt.savefig("{}/{}_{}.svg".format(spec_pic_dir, mzml_id, psm_id),bbox_inches='tight')
+            plt.savefig("{}/{}_{}.svg".format(spec_pic_dir, mzml_id, psm_id), bbox_inches='tight')
             plt.close()
             print("print")
             return
@@ -113,7 +110,7 @@ def get_specs(candidate, spectra_id_list, prot_dic, spec_pic_dir, mzml_dir):
 
 
 def main():
-    mzml_dir, database_dic, cand_list, prot_dic = load_data()
+    mzml_dir, cand_list, prot_dic = load_data()
     spec_pic_root = "../figs/"
 
     candidate = "blautia|CP039126.1|146236|1|3946668-3946884"

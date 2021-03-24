@@ -11,6 +11,12 @@ data_dir="$(cat "./parameters.json" |
 	python3 -c "import sys, json; print(json.load(sys.stdin)['data_dir'])")"
 tmp_dir="$(cat "./parameters.json" |
 	python3 -c "import sys, json; print(json.load(sys.stdin)['tmp_dir'])")"
+bin_path="$(cat "./parameters.json" |
+	python3 -c "import sys, json; print(json.load(sys.stdin)['bin_path'])")"
+ms_dir="$(cat "./parameters.json" |
+	python3 -c "import sys, json; print(json.load(sys.stdin)['ms_dir'])")"
+
+PATH="$bin_path:$PATH"
 
 # 1. Download genomes and build data bases
 echo "Download and build all necesary data bases"
@@ -55,6 +61,9 @@ echo "Plot figures"
 # 10. Wrong start annotation ecoli html list.
 echo "Build html for ecoli start annotation errors."
 python ./start_anno_html/wrapper_start_anno_html.py
+conda deactivate
+
+conda activate spec_util
 python ./start_anno_html/wrapper_start_anno_html_2.py
 
 echo "Protmap pipeline finished"

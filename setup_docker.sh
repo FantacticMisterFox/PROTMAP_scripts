@@ -19,11 +19,13 @@ fi
 # conda
 conda config --append channels conda-forge
 conda config --append channels bioconda
+conda config --append channels r
 conda env create -f conda_protmap.yml
 
 # comet
 wget -nv -P "$bin" https://sourceforge.net/projects/comet-ms/files/comet_2019014.zip
 unzip -d "$bin" "$bin/comet_2019014.zip"
+chmod +x "$bin/comet_2019014.linux.exe"
 rm "$bin/comet_2019014.zip"
 
 # chrome

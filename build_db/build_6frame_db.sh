@@ -57,7 +57,3 @@ for file in "$genome_dir/"*.gbk; do
 		cat $frame_file >> $ecoli_db_file
 	fi
 done
-
-
-exit 0
-

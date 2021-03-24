@@ -3,7 +3,7 @@ $(document).ready(function() {
 	var fragment_link = window.location.hash.substr(1);
 	if(fragment_link != ""){
 		$("#" + fragment_link).show(); 
-		$("#" + fragment_link).children("picture").each(function(){
+		$("#" + fragment_link).children("figure").each(function(){
 			source = $(this).children("img").attr("secret_src");
 			$(this).children("img").attr("src", source);
 		}).get;

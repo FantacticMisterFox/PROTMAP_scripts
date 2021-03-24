@@ -23,9 +23,9 @@ fi
 
 # This is temporarily until paper got published and PRIDE data is publicly available
 
-find /scr/k61san2/john/MS-Spektren/publication/ -name "*ecoli*mzML" -exec ln -s {} "$ms_dir/ecoli/mzML/" \;
+find "$ms_dir" -name "*ecoli*mzML" -exec ln -s {} "$ms_dir/ecoli/mzML/" \;
 
-find /scr/k61san2/john/MS-Spektren/publication/ -name "*SIHUMI*mzML" -exec ln -s {} "$ms_dir/SIHUMI/mzML/" \;
+find "$ms_dir" -name "*SIHUMI*mzML" -exec ln -s {} "$ms_dir/SIHUMI/mzML/" \;
 
 mzML_files=($(find $ms_dir -name "*.mzML"))
 db_types=("6frame" "proteom")
