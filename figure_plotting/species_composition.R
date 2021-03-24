@@ -5,7 +5,7 @@ library(Cairo)
 
 parameters <- fromJSON(file = "./parameters.json")
 
-fig_dir <- "../figs"
+fig_dir <- paste0(parameters$publication_dir, "/figs")
 
 pep_species_ratio_6frame <- read.delim(paste(parameters$data_dir, "/accumulated_data/pep_species_ratio.tsv", sep = ""), header=FALSE, stringsAsFactors=FALSE)
 

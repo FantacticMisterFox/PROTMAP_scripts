@@ -17,6 +17,11 @@ from selenium import webdriver
 import subprocess
 from glob import glob
 
+from pyteomics import mzml
+import matplotlib.pyplot as plt
+from spectrum_utils import plot
+from spectrum_utils import spectrum
+
 
 def find(name, path):
     for root, dirs, files in os.walk(path):
@@ -24,7 +29,6 @@ def find(name, path):
             return os.path.join(root, name)
 
 
-'''
 def plot_spectra(mzml_id, peptide, scan_id, mzml_dir, spec_pic_dir, psm_id):
     mzml_file = find(mzml_id, mzml_dir)
     with mzml.read(mzml_file) as reader:
@@ -66,7 +70,6 @@ def plot_spectra(mzml_id, peptide, scan_id, mzml_dir, spec_pic_dir, psm_id):
             print("print")
         else:
             print("Scan not found")
-'''
 
 
 def system_call(call_list):
@@ -216,10 +219,10 @@ def build_context_html(earlier_start, url_temp, orf_to_CDS, frame_dic,
         info["ncbi_id"] = annotated_protein
         # picture
         # full gene
-        # get_genome_browser_pic(chrome_options, info["strand"], info["start"],
-        #                        info["stop"], url_temp, info["species"],
-        #                        pic_dir, info["contig"], info["species"] + "_" +
-        #                        info["id"], off_set=0.1)
+        get_genome_browser_pic(chrome_options, info["strand"], info["start"],
+                               info["stop"], url_temp, info["species"],
+                               pic_dir, info["contig"], info["species"] + "_" +
+                               info["id"], off_set=0.1)
         # start of gene
         if info["strand"] == "1":
             gene_start = str(int(info["start"]) - 100)
@@ -227,10 +230,10 @@ def build_context_html(earlier_start, url_temp, orf_to_CDS, frame_dic,
         else:
             gene_start = str(int(info["stop"]) - int(start_anno * 3) - 100)
             gene_stop = str(int(info["stop"]) + 100)
-        # get_genome_browser_pic(chrome_options, info["strand"], gene_start,
-        #                        gene_stop, url_temp, info["species"], pic_dir,
-        #                        info["contig"], "start" + "_" + info["species"] +
-        #                        "_" + info["id"], off_set=0.1)
+        get_genome_browser_pic(chrome_options, info["strand"], gene_start,
+                               gene_stop, url_temp, info["species"], pic_dir,
+                               info["contig"], "start" + "_" + info["species"] +
+                               "_" + info["id"], off_set=0.1)
         info_dic[protein] = info
     context["protein_info_dic"] = info_dic
 
@@ -290,14 +293,14 @@ def set_up_chrome(chrome_bin, pic_dir):
     return chrome_options
 
 
-def print_spectras_PSM(context):
+def print_spectras_PSM(context, mzml_dir, output_dir):
+    spec_pic_dir = output_dir + "/pics"
     for protein, info in context["protein_info_dic"].items():
         psms = sorted(info["early_psms"], key=lambda x: x["e-value"])[0:11]
         info["printed_early_psms"] = psms
-
-    return context
-
-    # plot_spectra(mzml_id, peptide, scan_id, mzml_dir, spec_pic_dir, psm_id)
+        for psm in psms:
+            plot_spectra(psm["experiment"], psm["pep"], psm["scan"], mzml_dir,
+                         spec_pic_dir, str(psm["num"]) + "_" + psm["scan"])
 
 
 def main():

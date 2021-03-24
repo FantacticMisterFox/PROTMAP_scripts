@@ -5,7 +5,7 @@ library(Cairo)
 
 parameters <- fromJSON(file = "./parameters.json")
 
-fig_dir <- "../figs"
+fig_dir <- paste0(parameters$publication_dir, "/figs")
 
 colors <- c("#4DBBD5B2", "#00A087B2")
 discrepancy <- read.delim(paste(parameters$data_dir, "/accumulated_data/detected_protein_k_psm.tsv", sep = ""), header=FALSE, stringsAsFactors=FALSE)

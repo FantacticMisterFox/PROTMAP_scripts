@@ -22,7 +22,9 @@ plt.rc('ytick', labelsize=MEDIUM_SIZE)    # fontsize of the tick labels
 def load_data():
     selection_file = "nov_psm6"
     with open("./parameters.json", "r") as file_handle:
-        data_dir = json.load(file_handle)['data_dir']
+        parameters = json.load(file_handle)
+        data_dir = parameters['data_dir']
+        publication_dir = parameters["publication_dir"]
 
     accu_data_dir = data_dir + "/accumulated_data"
     cand_dir = data_dir + "/candidates"
@@ -34,7 +36,7 @@ def load_data():
     with open(accu_data_dir + "/prot_dic.json", "r") as file_handle:
         prot_dic = json.load(file_handle)
 
-    return mzml_dir, cand_list, prot_dic
+    return mzml_dir, cand_list, prot_dic, publication_dir
 
 
 def plot_spectra(mzml_id, peptide, scan_id, mzml_dir, spec_pic_dir, psm_id):
@@ -110,8 +112,8 @@ def get_specs(candidate, spectra_id_list, prot_dic, spec_pic_dir, mzml_dir):
 
 
 def main():
-    mzml_dir, cand_list, prot_dic = load_data()
-    spec_pic_root = "../figs/"
+    mzml_dir, cand_list, prot_dic, publication_dir = load_data()
+    spec_pic_root = publication_dir + "/figs/"
 
     candidate = "blautia|CP039126.1|146236|1|3946668-3946884"
     # selection of the specific spectra is not ambiguous but in this case clear

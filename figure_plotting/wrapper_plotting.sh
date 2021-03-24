@@ -2,6 +2,9 @@
 
 set -e
 
+conda deactivate
+conda activate protmap_R
+
 echo "Plot density distribution ecoli"
 Rscript ./figure_plotting/density.R
 
@@ -23,5 +26,6 @@ Rscript ./figure_plotting/species_composition.R
 echo "Venn diagramms"
 Rscript ./figure_plotting/venn.R
 
+conda activate protmap
 echo "Plot spectra"
 python ./figure_plotting/plot_spectra.py

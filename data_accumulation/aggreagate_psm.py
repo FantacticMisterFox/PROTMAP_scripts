@@ -160,7 +160,9 @@ def main():
     FDR_cut_off = 1
 
     with open("./parameters.json", "r") as file_handle:
-        data_dir = json.load(file_handle)['data_dir']
+        parameters = json.load(file_handle)
+        data_dir = parameters['data_dir']
+        publication_dir = parameters['publication_dir']
 
     db_dir = data_dir + "/dbs"
     ms_dir = data_dir + "/ms"
@@ -186,7 +188,7 @@ def main():
     with open(accu_data_dir + "/prot_dic.json", "r") as file_handle:
         prot_dic = json.load(file_handle)
 
-    with open("../ms_experiment_info.txt", "w") as file_handle:
+    with open(publication_dir + "/ms_experiment_info.txt", "w") as file_handle:
         file_handle.write("Number of total experiments: " +
                           str(len(database_dic["ecoli"]["6frame"].keys()) +
                               len(database_dic["SIHUMI"]["6frame"].keys())) + "\n")

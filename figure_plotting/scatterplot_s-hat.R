@@ -43,7 +43,7 @@ load_data <- function(selection_file, data_dir){
 }
 
 parameters <- fromJSON(file = "./parameters.json")
-pic_dir <- "../figs/"
+fig_dir <- paste0(parameters$publication_dir, "/figs")
 current_theme <- theme(legend.position="bottom", legend.direction = "horizontal",
 					   axis.text = element_text(size = 30),
 					   axis.title = element_text(size = 35),

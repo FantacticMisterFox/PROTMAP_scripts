@@ -1,48 +1,25 @@
 # Dependencies
 
-* GNU parallel 20180322
-* Inkscape 0.91 r13725 (Feb 22 2016)
-* chromedriver
-* EMBOSS:6.6.0.0 Suite
- * https://anaconda.org/bioconda/emboss
-* segmehl 0.2.0-418
- * https://anaconda.org/bioconda/segemehl
-* samtools Version: 0.1.19-44428cd
- * https://anaconda.org/bioconda/samtools
-* wigToBigWig v 4
- * https://anaconda.org/bioconda/ucsc-wigtobigwig
-* bedToBigBed v. 2.7
- * https://anaconda.org/bioconda/ucsc-bedtobigbed
-* faToTwoBit
- * https://anaconda.org/bioconda/ucsc-fatotwobit
-* twoBitInfo
- * https://anaconda.org/bioconda/ucsc-twobitinfo
-* blastp
- * https://anaconda.org/bioconda/blast 
+Most dependencies for the pipeline are met by the two conda_requirements
+```conda_protmap.yml``` and ```conda_protmap_R.yml```.
+
+The dependencies are tested on a ubuntu docker enviroment. To setup the docker
+enviroment the script ```./setup_docker.sh``` is used. All further depencencies
+are shown there. To meet the other depencies that are not covered by docker
+adapte this script accordingly.
+
 # Transcriptom
 
 In the contribution we used all raw reads from the bio sample ```PRJNA655119```
 for the expression analysis.
 ```https://www.ncbi.nlm.nih.gov/bioproject/?term=prjna655119```
-For downloading the reads the SRA Toolkit is needed.
-```https://ncbi.github.io/sra-tools/install_config.html```
 
 
 # Genomes
 
-The genomes must be stored in the data dir in the folder ```genome``` as .gbk files. Like so.
+For the publication the genomes for the following bacteria are downloaded.
 
-```
-data_dir/genome/
-├── anaero.gbk
-├── bact.gbk
-├── bifi.gbk
-├── blautia.gbk
-├── clostri.gbk
-├── ecoli.gbk
-├── ery.gbk
-└── lacto.gbk
-```
+This is handled by the script ```./build_db/download_all_genomes.sh```.
 
 The short names are used throughout the scripts and should not be changed.
 The full names are the following.
@@ -58,36 +35,46 @@ The full names are the following.
 | ery        | Erysipelatoclostridium ramosum DSM 1402                                 | 445974  | GCA_014131695.1 |
 | lacto      | Lactobacillus plantarum subsp plantarum ATCC 14917 JCM 1149 CGMCC 12437 | 525338  | GCA_014131735.1 |
 
-All genomes can be downloaded with the script
-```scripts/build_db/download_all_genomes.sh```. 
 # Structure of scripts
 
-All scripts neceary for the paper can be found in the folder scripts.
-The scripts can be divided into categorys, which each have its own subdirectory.
+All major steps are covered in ther own sub directory.
 
- 1. build\_db:
-   * Build the two main protein DBs, 6frame and proteome
- 2. proteom\_6frame\_map:
-   * Builds two hash map showing the relation between each protein in both DBs.
- 3. transcriptom:
-   * Builds bed files from raw RNA-Seq data.
+ 1. build_db:
+   * Builds databases for comet, downloads genomes
  4. comet:
-   * This directory is holding all relevant scripts that where used to build
-     the PSMs (Peptide to Spetrum Maps).
- 5. PSM_accumulation
-   * These scripts collect and filter all data from the comets PSMs and to
-     provide them for further analysis.
- 6. protein_accumulation
-   * These scripts assess likely protein candidate.
- 7. figure_plotting
+   * MS data is gathered, PSMs are generated.
+ 5. transcritptom
+   * All scripts for the mapping of the transcriptomic reads are here.
+ 6. data_accumulation
+   * Here most of the final analysis are done
+ 7. candidates
+   * Here the candidate selection and evaluation is done.
+ 8. UCSC_track_tools
+   * The UCSC track hub is generated here
+ 9. figure_plotting
    * All scripts for plots that where automatically generated from data are here.
- 8. HTML_building
-   * Webistes for listening and visualisation can be found here.
+ 8. start_anno_html
+   * The result for evidence of early annotation startsites are generated here.
 
 # Parameters
 
-The file ./scripts/parameters holds paramters for the script to run
+The file parameters.json holds paramters for the script to run and must be changed for each system.
 
- 1. data_dir
-  * Path in which all results will be stored.
- 2. 
+ 1. session_id
+   * trackhub session id
+ 2. hub_id
+   * hub_id for UCSC genome browser
+ 3. data_dir
+   * dir to store all data. 1.5 TB at least.
+ 4. tmp_dir
+   * dir for temporary files
+ 5. publication_dir
+   * dir to output figures and infos
+ 6. ms_dir
+   * dir of ms data. Not needed if PRIDE is available.
+ 7. chrome_bin
+   * dir to CORRECT (version) chrome binary .
+ 8. bin_path
+   * dir where comet etc is expected.
+ 9. blastdb_dir
+   * blast nt db.

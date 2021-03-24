@@ -7,7 +7,7 @@ library(Cairo)
 
 parameters <- fromJSON(file = "./parameters.json")
 
-fig_dir <- "../figs"
+fig_dir <- paste0(parameters$publication_dir, "/figs")
 
 scores_not_annotated_k10_ecoli_path <- paste(parameters$data_dir, "/accumulated_data/scores_not_annotated_k10_ecoli.csv", sep="")
 scores_not_annotated_k10_ecoli <- read.csv(scores_not_annotated_k10_ecoli_path, header=FALSE, comment.char="#", stringsAsFactors=T)

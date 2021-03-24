@@ -50,8 +50,8 @@ for(k in c(1,6,10)){
 
 	scores <- data.frame(data_base = scor_fact,
 			     log_score = c(scores_both, scores_only_6frame_noCDS, scores_only_proteom))
-	# pdf(paste("../figs/data_base_compare/k_", k, "_histogram.pdf", sep=""), width = 8, type="cairo")
-	CairoPDF(paste("../figs/data_base_compare/k_", k, "_histogram.pdf", sep=""), width = 8)
+	# pdf(paste(parameters$publication_dir, "/figs/data_base_compare/k_", k, "_histogram.pdf", sep=""), width = 8, type="cairo")
+	CairoPDF(paste(parameters$publication_dir, "/figs/data_base_compare/k_", k, "_histogram.pdf", sep=""), width = 8)
 	p <- ggplot(scores, aes(x=log_score, color=data_base, fill=data_base)) +
 	        geom_histogram(alpha=0.5, position="identity") +
 	        theme(legend.position="bottom", legend.direction = "vertical",
@@ -64,8 +64,8 @@ for(k in c(1,6,10)){
 	print(p)
 	dev.off()
 
-	# pdf(paste("../figs/data_base_compare/k_", k, "_density.pdf", sep=""), width = 8, type="cairo")
-	CairoPDF(paste("../figs/data_base_compare/k_", k, "_density.pdf", sep=""), width = 8, height = 6)
+	# pdf(paste(parameters$publication_dir, "/figs/data_base_compare/k_", k, "_density.pdf", sep=""), width = 8, type="cairo")
+	CairoPDF(paste(parameters$publication_dir, "/figs/data_base_compare/k_", k, "_density.pdf", sep=""), width = 8, height = 6)
 	print(ggplot(scores, aes(x=log_score, color=data_base, fill=data_base)) +
 		scale_x_continuous("log(e-value)", lim = c(-20,0), breaks = c(-20,-15,-10,-5,0)) +
 		scale_y_continuous("Density") +

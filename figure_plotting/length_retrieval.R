@@ -5,6 +5,8 @@ library(Cairo)
 
 parameters <- fromJSON(file = "./parameters.json")
 
+fig_dir <- paste0(parameters$publication_dir, "/figs")
+
 data_path <- paste(parameters$data_dir, "/accumulated_data/start_diffs", sep="")
 start_diffs <- read.csv(data_path, header=FALSE, stringsAsFactors=FALSE)
 colnames(start_diffs) <- c("diff", "k")
@@ -31,7 +33,7 @@ for(k in c(1, 10)){
 	num_all <- length(start_diffs[start_diffs[,2] > k, 1])
 	print(paste(round((num_no_diff/num_all) * 100), "% of proteins can be",
 		    "retrieved with 95% of orginal size", sep=""))
-	CairoPDF(paste("../figs/length_compare/size_retrival_", k, ".pdf", sep=""))
+	CairoPDF(paste(fig_dir, "/length_compare/size_retrival_", k, ".pdf", sep=""))
 	print(p)
 	dev.off()
 }

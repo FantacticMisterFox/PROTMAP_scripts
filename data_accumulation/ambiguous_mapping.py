@@ -5,14 +5,16 @@ import json
 
 def load_data():
     with open("./parameters.json", "r") as file_handle:
-        data_dir = json.load(file_handle)['data_dir']
+        parameters = json.load(file_handle)
+        data_dir = parameters['data_dir']
+        publication_dir = parameters["publication_dir"]
 
     accu_data_dir = data_dir + "/accumulated_data"
 
     with open(accu_data_dir + "/database_dic.json", "r") as file_handle:
         database_dic = json.load(file_handle)
 
-    return database_dic
+    return database_dic, publication_dir
 
 
 def make_ambiguous_dic(database_dic, FDR_cut_off):
@@ -46,7 +48,7 @@ def make_table(ambiguous_dic, max_num, sum_proteom, sum_6frame):
 
 
 def main():
-    database_dic = load_data()
+    database_dic, publication_dir = load_data()
 
     ambiguous_dic = make_ambiguous_dic(database_dic)
 
@@ -58,7 +60,7 @@ def main():
 
     table_tex = make_table(ambiguous_dic, max_num, sum_proteom, sum_6frame)
 
-    with open("../ambiguous_mapping.tex", "w") as file_handler:
+    with open(publication_dir + "/ambiguous_mapping.tex", "w") as file_handler:
         file_handler.write(table_tex)
 
 

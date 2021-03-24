@@ -13,7 +13,7 @@ def main():
     with open(accu_data_dir + "/prot_dic.json", "r") as file_handle:
         prot_dic = json.load(file_handle)
 
-    with open("../not_annotated_k10_ecoli.csv", "r") as file_handle:
+    with open("./not_annotated_k10_ecoli.csv", "r") as file_handle:
         res = []
         for line in file_handle:
             candidate = line.split(",")[2]
@@ -27,7 +27,7 @@ def main():
     with open(accu_data_dir + "/scores_not_annotated_k10_ecoli.csv", "w") as file_handle:
         file_handle.write("".join([",".join(line) for line in res]))
 
-    with open("../early_starts.csv", "r") as file_handle:
+    with open("./early_starts.csv", "r") as file_handle:
         res = []
         for line in file_handle:
             candidate = line.split(",")[2]

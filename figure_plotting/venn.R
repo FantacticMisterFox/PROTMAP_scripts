@@ -7,6 +7,8 @@ library(Cairo)
 names_of_sets = c(" full NCBI anno.", " detected 6frame", " detected NCBI anno.")
 parameters <- fromJSON(file = "./parameters.json")
 
+fig_dir <- paste0(parameters$publication_dir, "/figs")
+
 sf1 <- paste(parameters$data_dir, "/accumulated_data/all_CDS", sep = "")
 set1 <- array(read.table(sf1)[,1])
 k <- 1
@@ -22,7 +24,7 @@ for(k in c(1,6,10)){
   set_of_sets <- list(set1, set2, set3)
   names(set_of_sets) <- names_of_sets
   
-  CairoPDF(paste("../figs/data_base_compare/venn_", k, ".pdf", sep = ""), width = 7, height = 7)
+  CairoPDF(paste(fig_dir, "/data_base_compare/venn_", k, ".pdf", sep = ""), width = 7, height = 7)
   p <- plot(euler(set_of_sets, shape = "ellipse"), fills = Col,
        quantities = list(cex = 3),
        legend = list(nrow = 3, ncol = 4, pch = 15, col = Col

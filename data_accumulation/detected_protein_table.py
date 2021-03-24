@@ -6,7 +6,9 @@ from Bio import SeqIO
 
 def load_data():
     with open("./parameters.json", "r") as file_handle:
-        data_dir = json.load(file_handle)['data_dir']
+        parameters = json.load(file_handle)
+        data_dir = parameters['data_dir']
+        publication_dir = parameters["publication_dir"]
 
     db_dir = data_dir + "/dbs"
     genome_dir = data_dir + "/genome"
@@ -23,7 +25,7 @@ def load_data():
     with open(accu_data_dir + "/prot_dic.json", "r") as file_handle:
         prot_dic = json.load(file_handle)
 
-    return proteom_dic, validation_dic, prot_dic, orf_to_CDS
+    return proteom_dic, validation_dic, prot_dic, orf_to_CDS, publication_dir
 
 
 def collect_infos(prot_dic, species_list, orf_to_CDS, validation_dic):
@@ -134,12 +136,12 @@ def main():
     species_list = ['bact', 'blautia', 'ecoli', 'ery', 'bifi', 'anaero',
                     'lacto', 'clostri']
     (proteom_dic, validation_dic, prot_dic,
-     orf_to_CDS) = load_data()
+     orf_to_CDS, publication_dir) = load_data()
 
     result_dic = collect_infos(prot_dic, species_list,  orf_to_CDS,
                                validation_dic)
 
-    with open("../protein_detected.tex", "w") as file_handle:
+    with open(publication_dir + "/protein_detected.tex", "w") as file_handle:
         file_handle.write(print_table(result_dic, species_list, proteom_dic))
 
 

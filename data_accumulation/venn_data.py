@@ -100,7 +100,7 @@ def data_4_venn(orf_to_CDS, CDS_to_orf, accu_data_dir, prot_dic):
 
 def data_4_edgecases(prot_dic, accu_data_dir):
     species_type = "ecoli"
-    with open("../not_annotated_k10_ecoli.csv", "r") as file_handle:
+    with open("./not_annotated_k10_ecoli.csv", "r") as file_handle:
         res = []
         for line in file_handle:
             candidate = line.split(",")[2]
@@ -111,13 +111,13 @@ def data_4_edgecases(prot_dic, accu_data_dir):
     with open(accu_data_dir + "/scores_not_annotated_k10_ecoli.csv", "w") as file_handle:
         file_handle.write("\n".join([",".join(line) for line in res]))
 
-    with open("../early_starts.csv", "r") as file_handle:
-        res = []
-        for line in file_handle:
-            candidate = line.split(",")[2]
-            category = line.split(",")[4]
-            e_vals = [str(psm["e-value"]) for psm in prot_dic[species_type]["6frame"][candidate]]
-            res += [[e, category] for e in e_vals]
+    # with open("./early_starts.csv", "r") as file_handle:
+    #     res = []
+    #     for line in file_handle:
+    #         candidate = line.split(",")[2]
+    #         category = line.split(",")[4]
+    #         e_vals = [str(psm["e-value"]) for psm in prot_dic[species_type]["6frame"][candidate]]
+    #         res += [[e, category] for e in e_vals]
 
 
 def main():
