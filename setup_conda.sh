@@ -9,6 +9,7 @@ conda config --append channels conda-forge
 conda config --append channels bioconda
 conda config --append channels r
 
+# R
 conda create -y -n protmap_R python=3.6
 
 conda activate protmap_R
@@ -17,6 +18,18 @@ conda install -y r r-Cairo r-Rcpp r-glue r-ggplot2 r-ggsci r-gridExtra r-htmlwid
 
 conda env export > conda_protmap_R.yml
 
+conda deactivate
+
+# Spectrum Utils
+conda create -y -n protmap_spec_util python=3.6
+
+conda install -y spectrum_utils
+
+conda activate spectrum_utils
+
+conda env export > conda_spectrum_utils.yml
+
+# Rest
 conda deactivate
 
 conda create -y -n protmap python=3.6
