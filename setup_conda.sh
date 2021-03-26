@@ -23,9 +23,9 @@ conda deactivate
 # Spectrum Utils
 conda create -y -n protmap_spec_util python=3.6
 
-conda install -y spectrum_utils
+conda activate protmap_spec_util
 
-conda activate spectrum_utils
+conda install -y spectrum_utils
 
 conda env export > conda_spectrum_utils.yml
 
