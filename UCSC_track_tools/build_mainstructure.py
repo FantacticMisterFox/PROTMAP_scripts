@@ -105,7 +105,7 @@ hub_txt = ("hub SIHUMI\n"
            "shortLabel SIHUMI\n"
            "longLabel simplified human intestinal microbiota HUB\n"
            "genomesFile genomes.txt\n"
-           "descriptionUrl https://github.com/studla/PROTMAP\n"
+           "descriptionUrl https://pubmed.ncbi.nlm.nih.gov/34039272/\n"
            "email john@bioinf.uni-leipzig.de\n")
 groups_txt_template = "name {0}\nlabel {1}\npriority {2}\ndefaultIsClosed {3}"
 genomes_txt = ("genome {0}\n"

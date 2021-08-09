@@ -5,8 +5,6 @@ set -e
 conda_base=$(conda info | grep -i 'base environment' | awk '{print $4}')
 source "$conda_base/etc/profile.d/conda.sh"
 conda activate protmap
-# source /opt/miniconda2/bin/activate /scr/k61san2/john/conda_protmap_R
-# source /opt/miniconda2/bin/activate /scr/k61san2/john/conda_protmap_rest
 
 data_dir="$(cat "./parameters.json" |
 	python3 -c "import sys, json; print(json.load(sys.stdin)['data_dir'])")"
@@ -62,5 +60,8 @@ echo "Plot figures"
 # 10. Wrong start annotation ecoli html list.
 echo "Build html for ecoli start annotation errors."
 python ./start_anno_html/wrapper_start_anno_html.py
+
+conda activate spec_util
+python ./start_anno_html/wrapper_start_anno_html_2.py
 
 echo "Protmap pipeline finished"

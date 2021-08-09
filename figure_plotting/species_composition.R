@@ -31,7 +31,7 @@ both_composition$species <- unlist(lapply(both_composition$species, FUN = functi
 
 Col <- pal_npg("nrc", alpha=0.7)(10)
 Col <- c(Col[1], Col[3])
-CairoPDF(paste(fig_dir, "/composition_both.pdf", sep = ""), width = 10)
+CairoPDF(paste(fig_dir, "/composition_both.pdf", sep = ""), width = 11)
 ggplot(both_composition, aes(x=reorder(species, as.numeric(ratio)), y=ratio, fill = type)) +
   geom_bar(stat="identity", position=position_dodge()) +
   coord_flip() +
